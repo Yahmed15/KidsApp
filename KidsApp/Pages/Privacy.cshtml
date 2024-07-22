@@ -1,0 +1,181 @@
+﻿@page
+@model KidsApp.Pages.PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KidsApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/KidsApp.styles.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #800000;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            margin-right: 15px;
+            color: #fff !important;
+        }
+
+        .cart-buttons {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+            .cart-buttons .btn {
+                background-color: #8B0000;
+                color: #fff;
+                margin-left: 10px;
+            }
+
+        .card {
+            border: none;
+            background-color: #f9f9f9;
+        }
+
+        .card-title {
+            color: #ff6600;
+        }
+
+        footer {
+            background-color: #800000;
+            color: #fff;
+        }
+
+        .social-buttons a {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">KidsApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Products/Index">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Apps/Index">Apps</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Inquiry/Index">Inquiry</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                    <div class="cart-buttons">
+                        <a asp-page="/Cart/Index" class="btn btn-lg">View Cart</a>
+                        <a asp-page="/Checkout/Index" class="btn btn-lg">Proceed to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p>Your privacy is important to us. This privacy statement explains the personal data our application processes, how our application processes it, and for what purposes.</p>
+
+        <h2>Information We Collect</h2>
+        <p>We collect various types of information in connection with the services we provide, including:</p>
+        <ul>
+            <li>Personal identification information (Name, email address, phone number, etc.)</li>
+            <li>Usage data (e.g., how you use our application, features accessed, etc.)</li>
+            <li>Device information (e.g., device type, operating system, IP address, etc.)</li>
+        </ul>
+
+        <h2>How We Use Your Information</h2>
+        <p>We use the information we collect in various ways, including to:</p>
+        <ul>
+            <li>Provide, operate, and maintain our application</li>
+            <li>Improve, personalize, and expand our application</li>
+            <li>Understand and analyze how you use our application</li>
+            <li>Develop new products, services, features,
+                and functionality
+            </li>
+            <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the application, and for marketing and promotional purposes</li>
+            <li>Process your transactions and manage your orders</li>
+            <li>Send you emails</li>
+            <li>Find and prevent fraud</li>
+        </ul>
+
+        <h2>How We Share Your Information</h2>
+        <p>We do not share your personal information with third parties except as necessary to operate our services, comply with the law, or protect our rights. This includes:</p>
+        <ul>
+            <li>Service providers: We may share your information with third-party service providers who perform services on our behalf, such as payment processing, data analysis, email delivery, hosting services, customer service, and marketing assistance.</li>
+            <li>Business transfers: We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
+            <li>Legal requirements: We may disclose your information if we believe it is necessary to comply with a legal obligation, protect our rights, prevent fraud, or address security or technical issues.</li>
+        </ul>
+
+        <h2>Security of Your Information</h2>
+        <p>We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.</p>
+
+        <h2>Retention of Your Information</h2>
+        <p>We will retain your personal information only for as long as is necessary for the purposes set out in this privacy policy, unless a longer retention period is required or permitted by law.</p>
+
+        <h2>Your Data Protection Rights</h2>
+        <p>You have certain data protection rights. These include the right to:</p>
+        <ul>
+            <li>Access: You have the right to request copies of your personal data.</li>
+            <li>Rectification: You have the right to request that we correct any information you believe is inaccurate or complete information you believe
+                is incomplete.
+            </li>
+            <li>Erasure: You have the right to request that we erase your personal data, under certain conditions.</li>
+            <li>Restrict processing: You have the right to request that we restrict the processing of your personal data, under certain conditions.</li>
+            <li>Object to processing:
+                You have the right to object to our processing of your personal data, under certain conditions.
+            </li>
+            <li>Data portability: You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
+        </ul>
+
+        <h2>Children's Privacy</h2>
+        <p>Our application does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to take necessary actions.</p>
+
+        <h2>Changes to This Privacy Policy</h2>
+        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us:</p>
+        <ul>
+            <li>By email: support@kidsapp.com</li>
+            <li>By visiting this page on our website: <a href="/Contact">Contact Us</a></li>
+            <li>By phone number: (123) 456-7890</li>
+        </ul>
+    </div>
+
+    <footer class="border-top footer text-muted mt-5">
+        <div class="container">
+            &copy; 2024 - KidsApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

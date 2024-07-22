@@ -1,0 +1,192 @@
+﻿@page
+@model KidsApp.Pages.Apps.IndexModel
+@{
+    ViewData["Title"] = "Apps";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KidsApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/KidsApp.styles.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #800000;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            margin-right: 15px;
+            color: #fff !important;
+        }
+
+        .cart-buttons {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+            .cart-buttons .btn {
+                background-color: #8B0000;
+                color: #fff;
+                margin-left: 10px;
+            }
+
+        .card {
+            border: none;
+            background-color: #f9f9f9;
+        }
+
+        .card-title {
+            color: #ff6600;
+        }
+
+        footer {
+            background-color: #800000;
+            color: #fff;
+        }
+
+        .social-buttons a {
+            margin: 0 5px;
+        }
+
+        .card-img-top {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">KidsApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Products/Index">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Apps/Index">Apps</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Inquiry/Index">Inquiry</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                    <div class="cart-buttons">
+                        <a asp-page="/Cart/Index" class="btn btn-lg">View Cart</a>
+                        <a asp-page="/Checkout/Index" class="btn btn-lg">Proceed to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <h1 class="display-4">Our Apps</h1>
+                <p class="lead">Discover a variety of educational and fun apps designed to engage and inspire young learners.</p>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="https://m.media-amazon.com/images/S/pv-target-images/7b48c2604595834d046ca4401cf1b1a0fe8affa791487061a861a651570527a0.jpg" class="card-img-top" alt="App 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">App 1: Learning ABCs</h5>
+                        <p class="card-text">An interactive app to help kids learn the alphabet through fun games and activities.</p>
+                        <a href="https://example.com/download/app1" class="btn btn-primary" download>Download App 1</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2134760/header.jpg?t=1665130683" class="card-img-top" alt="App 2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">App 2: Math Adventures</h5>
+                        <p class="card-text">A fun and engaging app to help kids improve their math skills with exciting challenges.</p>
+                        <a href="https://example.com/download/app2" class="btn btn-primary" download>Download App 2</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="https://scienceexplorer.my/wp-content/uploads/2016/09/logo_ScienceExplorer_header.png" class="card-img-top" alt="App 3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">App 3: Science Explorer</h5>
+                        <p class="card-text">Explore the wonders of science with interactive experiments and educational content.</p>
+                        <a href="https://example.com/download/app3" class="btn btn-primary" download>Download App 3</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="https://www.lisdoonvarnans.ie/wp-content/uploads/2023/01/Healthy-eating.jpg" class="card-img-top" alt="App 4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">App 4: Healthy Eating</h5>
+                        <p class="card-text">Teach kids about healthy eating habits through interactive stories and games.</p>
+                        <a href="https://example.com/download/app4" class="btn btn-primary" download>Download App 4</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="https://cdn3.vectorstock.com/i/1000x1000/44/42/abstract-art-studio-logo-template-vector-3994442.jpg" class="card-img-top" alt="App 5">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">App 5: Art Studio</h5>
+                        <p class="card-text">A creative app that allows kids to express themselves through digital art and drawing tools.</p>
+                        <a href="https://example.com/download/app5" class="btn btn-primary" download>Download App 5</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="https://www.pdcourses.net/blog_images/AdobeStock196966432.jpeg" class="card-img-top" alt="App 6">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">App 6: Language Learner</h5>
+                        <p class="card-text">Help kids learn new languages with fun and interactive lessons and games.</p>
+                        <a href="https://example.com/download/app6" class="btn btn-primary" download>Download App 6</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted mt-5">
+        <div class="container">
+            &copy; 2024 - KidsApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

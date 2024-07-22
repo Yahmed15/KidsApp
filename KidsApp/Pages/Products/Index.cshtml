@@ -1,0 +1,151 @@
+﻿@page
+@model KidsApp.Pages.Products.IndexModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KidsApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #800000;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            margin-right: 15px;
+            color: #fff !important;
+        }
+
+        .cart-buttons {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+            .cart-buttons .btn {
+                background-color: #8B0000;
+                color: #fff;
+                margin-left: 10px;
+            }
+
+        .card {
+            border: none;
+            background-color: #f9f9f9;
+        }
+
+        .card-title {
+            color: #ff6600;
+        }
+
+        footer {
+            background-color: #800000;
+            color: #fff;
+        }
+
+        .social-buttons a {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">KidsApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Products/Index">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Apps/Index">Apps</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Inquiry/Index">Inquiry</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a></li>
+                    </ul>
+                    <div class="cart-buttons">
+                        <a asp-page="/Cart/Index" class="btn btn-lg">View Cart</a>
+                        <a asp-page="/Checkout/Index" class="btn btn-lg">Proceed to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <h1 class="display-4">Our Products</h1>
+                <p class="lead">Explore our diverse range of educational products designed to enhance learning and fun.</p>
+            </div>
+        </div>
+        <div class="row mt-5">
+            @if (Model.Products != null && Model.Products.Count > 0)
+            {
+                foreach (var product in Model.Products)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">@product.Name</h5>
+                                <p class="card-text">@product.Description</p>
+                                <p class="card-text"><strong>Price: £@product.Price</strong></p> <!-- Updated currency symbol -->
+                                <form class="add-to-cart-form" method="post" asp-page-handler="AddToCart">
+                                    <input type="hidden" name="id" value="@product.Id" />
+                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-md-12 text-center">
+                    <p class="lead">No products available at the moment. Please check back later.</p>
+                </div>
+            }
+        </div>
+    </div>
+    <footer class="border-top footer text-muted mt-5">
+        <div class="container">
+            &copy; 2024 - KidsApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.add-to-cart-form').submit(function (event) {
+                event.preventDefault(); // Prevent the form from submitting the traditional way
+                var form = $(this);
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function (response) {
+                        alert('Product added to cart successfully!');
+                        // Optionally, update the cart icon or display a message
+                    },
+                    error: function () {
+                        alert('An error occurred. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

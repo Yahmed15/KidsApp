@@ -1,0 +1,194 @@
+﻿@page
+@model KidsApp.Pages.Checkout.IndexModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KidsApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #800000;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            margin-right: 15px;
+            color: #fff !important;
+        }
+
+        .cart-buttons {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+            .cart-buttons .btn {
+                background-color: #8B0000;
+                color: #fff;
+                margin-left: 10px;
+            }
+
+        .card {
+            border: none;
+            background-color: #f9f9f9;
+        }
+
+        .card-title {
+            color: #ff6600;
+        }
+
+        footer {
+            background-color: #800000;
+            color: #fff;
+        }
+
+        .social-buttons a {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">KidsApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Products/Index">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Apps/Index">Apps</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Inquiry/Index">Inquiry</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                    <div class="cart-buttons">
+                        <a asp-page="/Cart/Index" class="btn btn-lg">View Cart</a>
+                        <a asp-page="/Checkout/Index" class="btn btn-lg">Proceed to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Checkout</h1>
+        <p>Your order details:</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr>
+                        <td>@item.Product?.Name</td>
+                        <td>@item.Product?.Price.ToString("C")</td>
+                        <td>@item.Quantity</td>
+                        <td>@((item.Product?.Price * item.Quantity)?.ToString("C") ?? "N/A")</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3"><strong>Total Price:</strong></td>
+                    <td>@Model.TotalPrice.ToString("C")</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>VAT (20%):</strong></td>
+                    <td>@Model.VatAmount.ToString("C")</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>Grand Total:</strong></td>
+                    <td>@Model.GrandTotal.ToString("C")</td>
+                </tr>
+            </tbody>
+        </table>
+        <form id="checkoutForm" method="post" action="/Checkout/Confirm" onsubmit="return handleFormSubmit()">
+            <button type="submit" class="btn btn-primary">Confirm Order</button>
+        </form>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal fade" id="orderConfirmationModal" tabindex="-1" aria-labelledby="orderConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderConfirmationModalLabel">Order Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="orderConfirmationMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted mt-5">
+        <div class="container">
+            &copy; 2024 - KidsApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        function handleFormSubmit() {
+            // Generate a random order ID
+            const orderId = 'ORD-' + Math.floor(Math.random() * 1000000);
+
+            // Collect order details
+            const totalPrice = '@Model.TotalPrice.ToString("C")';
+            const vatAmount = '@Model.VatAmount.ToString("C")';
+            const grandTotal = '@Model.GrandTotal.ToString("C")';
+
+            // Create the confirmation message
+            const message = `
+                        <strong>Order ID:</strong> ${orderId}<br>
+                        <strong>Total Price:</strong> ${totalPrice}<br>
+                        <strong>VAT (20%):</strong> ${vatAmount}<br>
+                        <strong>Grand Total:</strong> ${grandTotal}
+                    `;
+
+            // Show the confirmation modal
+            document.getElementById('orderConfirmationMessage').innerHTML = message;
+            const orderConfirmationModal = new bootstrap.Modal(document.getElementById('orderConfirmationModal'));
+            orderConfirmationModal.show();
+
+            // Prevent the default form submission
+            return false;
+        }
+    </script>
+</body>
+</html>

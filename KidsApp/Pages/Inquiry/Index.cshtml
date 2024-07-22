@@ -1,0 +1,173 @@
+﻿@page
+@model KidsApp.Pages.Inquiry.IndexModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - KidsApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/KidsApp.styles.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #800000;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            margin-right: 15px;
+            color: #fff !important;
+        }
+
+        .cart-buttons {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+            .cart-buttons .btn {
+                background-color: #8B0000;
+                color: #fff;
+                margin-left: 10px;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">KidsApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Products/Index">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Apps/Index">Apps</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-area="" asp-page="/Inquiry/Index">Inquiry</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                    <div class="cart-buttons">
+                        <a asp-page="/Cart/Index" class="btn btn-lg">View Cart</a>
+                        <a asp-page="/Checkout/Index" class="btn btn-lg">Proceed to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <!-- Contact Us -->
+            <div class="card mb-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Contact Us</h5>
+                    <p class="card-text">Have questions? Contact us directly. We are here to help you with any inquiries you may have about our products, services, or any other questions. Our customer service team is dedicated to providing you with the best support possible. Reach out to us via phone, email, or through our online contact form. We look forward to hearing from you!</p>
+                    <div class="social-buttons">
+                        <a href="https://www.facebook.com" class="btn btn-primary" target="_blank">Facebook</a>
+                        <a href="https://www.twitter.com" class="btn btn-info" target="_blank">Twitter</a>
+                        <a href="https://www.instagram.com" class="btn btn-danger" target="_blank">Instagram</a>
+                        <a href="https://www.tiktok.com" class="btn btn-primary" target="_blank">TikTok</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <br />
+        <h2>Send a Message</h2>
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success">@TempData["Message"]</div>
+        }
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="NewInquiry.Name" class="control-label"></label>
+                <input asp-for="NewInquiry.Name" class="form-control" />
+                <span asp-validation-for="NewInquiry.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewInquiry.Email" class="control-label"></label>
+                <input asp-for="NewInquiry.Email" class="form-control" />
+                <span asp-validation-for="NewInquiry.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewInquiry.Message" class="control-label"></label>
+                <textarea asp-for="NewInquiry.Message" class="form-control"></textarea>
+                <span asp-validation-for="NewInquiry.Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <br />
+        <h2>Inquiry List</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Inquiry Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListInquiry)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.Message</td>
+                        <td>@item.InquiryDate</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="/inquiry/Like?Id=@item.Id">Like</a>
+                            <a class="btn btn-danger btn-sm" href="/inquiry/Dislike?Id=@item.Id">Dislike</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+        }
+    </div>
+
+    <footer class="border-top footer text-muted mt-5">
+        <div class="container">
+            &copy; 2024 - KidsApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
